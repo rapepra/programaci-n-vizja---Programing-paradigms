@@ -1,17 +1,13 @@
-"""
-Assignment 1 - Question 3: Four Programming Paradigms - Smart ATM Transaction System
-
-Approach:
-This file demonstrates how to solve the ATM transaction problem using four different programming paradigms:
-1. Procedural Programming: Uses loops, variables, and conditions to process transactions sequentially.
-2. Object-Oriented Programming: Uses a BankAccount class to encapsulate state and operations.
-3. Functional Programming: Uses map(), filter(), reduce(), and lambda functions without mutating state.
-4. Logical Programming: Uses Facts and Rules to deduce customer balances and VIP status.
-"""
+# Question 3: Four Programming Paradigms - Smart ATM Transaction System
+# Approach:
+# We solve the ATM transaction problem using 4 different paradigms:
+# 1. Procedural: updates balances sequentially in a dictionary with loops and if/elif.
+# 2. OOP: uses a BankAccount class with deposit, withdraw, and is_vip methods.
+# 3. Functional: uses map, filter, reduce, and lambda without mutating state.
+# 4. Logical: defines Facts and deductive Rules to determine balances and VIP status.
 
 from functools import reduce
 
-# Given transaction data
 transactions = [
     ("Alice", "deposit", 5000),
     ("Bob", "withdraw", 2000),
@@ -24,10 +20,8 @@ transactions = [
 bonus_transactions = transactions + [("Charlie", "deposit", 2000)]
 
 
-# ------------------------------------------------------------
 # 1. Procedural Programming
-# ------------------------------------------------------------
-def run_procedural(tx_list, check_vip=False):
+def run_procedural(tx_list, show_vip=False):
     balances = {}
     for name, action, amount in tx_list:
         if name not in balances:
@@ -39,13 +33,11 @@ def run_procedural(tx_list, check_vip=False):
             balances[name] -= amount
 
     for name, balance in balances.items():
-        vip_tag = " (VIP)" if (check_vip and balance > 3000) else ""
+        vip_tag = " (VIP)" if (show_vip and balance > 3000) else ""
         print(f"{name} : {balance}{vip_tag}")
 
 
-# ------------------------------------------------------------
-# 2. Object-Oriented Programming
-# ------------------------------------------------------------
+# 2. Object-Oriented Programming (OOP)
 class BankAccount:
     def __init__(self, owner, balance=0):
         self.owner = owner
@@ -61,7 +53,7 @@ class BankAccount:
         return self.balance > 3000
 
 
-def run_oop(tx_list, check_vip=False):
+def run_oop(tx_list, show_vip=False):
     accounts = {}
     for name, action, amount in tx_list:
         if name not in accounts:
@@ -73,14 +65,12 @@ def run_oop(tx_list, check_vip=False):
             accounts[name].withdraw(amount)
 
     for name, acc in accounts.items():
-        vip_tag = " (VIP)" if (check_vip and acc.is_vip()) else ""
+        vip_tag = " (VIP)" if (show_vip and acc.is_vip()) else ""
         print(f"{name} : {acc.balance}{vip_tag}")
 
 
-# ------------------------------------------------------------
-# 3. Functional Programming
-# ------------------------------------------------------------
-def run_functional(tx_list, check_vip=False):
+# 3. Functional Programming (FP)
+def run_functional(tx_list, show_vip=False):
     customers = list(dict.fromkeys(tx[0] for tx in tx_list))
 
     def balance_for(customer):
@@ -98,15 +88,13 @@ def run_functional(tx_list, check_vip=False):
     )
 
     for name, balance in balances.items():
-        vip_tag = " (VIP)" if (check_vip and name in vips) else ""
+        vip_tag = " (VIP)" if (show_vip and name in vips) else ""
         print(f"{name} : {balance}{vip_tag}")
 
 
-# ------------------------------------------------------------
-# 4. Logical Programming
-# ------------------------------------------------------------
-def run_logical(tx_list, check_vip=False):
-    # Facts
+# 4. Logical Programming (LP)
+def run_logical(tx_list, show_vip=False):
+    # Facts: (action, person, amount)
     facts = [(action, person, amount) for person, action, amount in tx_list]
     people = list(dict.fromkeys(p for _, p, _ in facts))
 
@@ -125,27 +113,24 @@ def run_logical(tx_list, check_vip=False):
 
     for person in people:
         bal = balance_rule(person)
-        vip_tag = " (VIP)" if (check_vip and vip_rule(person)) else ""
+        vip_tag = " (VIP)" if (show_vip and vip_rule(person)) else ""
         print(f"{person} : {bal}{vip_tag}")
 
 
-# ------------------------------------------------------------
-# Main Execution
-# ------------------------------------------------------------
 def main():
-    sections = [
+    paradigms = [
         ("1. Procedural Programming", run_procedural),
         ("2. Object-Oriented Programming", run_oop),
         ("3. Functional Programming", run_functional),
         ("4. Logical Programming", run_logical),
     ]
 
-    for title, runner in sections:
+    for title, runner in paradigms:
         print(f"\n--- {title} ---")
-        runner(transactions, check_vip=False)
+        runner(transactions, show_vip=False)
 
         print("\nBonus:")
-        runner(bonus_transactions, check_vip=True)
+        runner(bonus_transactions, show_vip=True)
 
 
 if __name__ == "__main__":

@@ -1,13 +1,7 @@
-"""
-Assignment 1 - Question 3: Smart ATM Transaction System
-Paradigm 2: Object-Oriented Programming (OOP)
-
-Approach:
-In Object-Oriented Programming, we model the system using classes that combine data and behavior.
-We create a BankAccount class to represent each customer's account with methods for deposit and withdraw.
-Transactions are applied by calling these methods on each account object.
-For the bonus, we add a method to check if an account qualifies for VIP status.
-"""
+# Question 3: Smart ATM Transaction System - Object-Oriented Programming (OOP)
+# Approach:
+# Model bank accounts using a BankAccount class with deposit, withdraw, and is_vip methods.
+# For each transaction, find or create the account and call the appropriate method.
 
 transactions = [
     ("Alice", "deposit", 5000),

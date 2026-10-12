@@ -1,14 +1,7 @@
-"""
-Assignment 1 - Question 3: Smart ATM Transaction System
-Paradigm 1: Procedural Programming
-
-Approach:
-In procedural programming, we process transactions step by step using loops,
-variables, and conditional statements.
-We store customer balances in a dictionary, iterate through each transaction,
-and update the balance depending on whether it is a deposit or a withdrawal.
-For the bonus, we add Charlie's extra transaction and check if any balance exceeds 3000.
-"""
+# Question 3: Smart ATM Transaction System - Procedural Programming
+# Approach:
+# Process transactions step by step using a loop and a dictionary.
+# Update balances with if/elif conditions for deposit and withdraw, and check VIP status for the bonus.
 
 transactions = [
     ("Alice", "deposit", 5000),

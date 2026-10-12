@@ -1,13 +1,7 @@
-"""
-Assignment 1 - Question 1: Procedural Programming - Student Grades
-
-Approach:
-This program manages student grades using procedural programming.
-1. The user enters grades separated by spaces, which are parsed into a list of integers.
-2. We calculate the average grade using the sum and length of the list.
-3. A loop checks each grade to count how many students passed (>= 50) and failed (< 50).
-4. The results are displayed according to the required format.
-"""
+# Question 1: Procedural Programming - Student Grades
+# Approach:
+# Read grades from user input as space-separated values, convert them into integers,
+# calculate the average grade, and loop through them to count passed (>= 50) and failed (< 50).
 
 
 def main():
@@ -18,13 +12,13 @@ def main():
         print("No grades were entered.")
         return
 
-    # Calculate average grade
+    # Calculate average
     total = 0
     for grade in grades:
         total += grade
     average = total / len(grades)
 
-    # Count passing and failing grades
+    # Count passed and failed
     passed = 0
     failed = 0
     for grade in grades:
@@ -33,7 +27,6 @@ def main():
         else:
             failed += 1
 
-    # Output results
     print(f"Average grade: {round(average, 2)}")
     print(f"Number of students who passed: {passed}")
     print(f"Number of students who failed: {failed}")

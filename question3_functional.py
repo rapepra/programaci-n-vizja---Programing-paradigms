@@ -1,15 +1,7 @@
-"""
-Assignment 1 - Question 3: Smart ATM Transaction System
-Paradigm 3: Functional Programming (FP)
-
-Approach:
-In Functional Programming, we avoid mutating state variables.
-Instead, we use pure functions and higher-order functions like map(), filter(), reduce(), and lambda.
-1. We filter transactions for each customer.
-2. We map each transaction to its signed amount (+ for deposit, - for withdraw).
-3. We reduce the signed amounts to compute the customer's final balance.
-4. For the bonus, we filter customers whose balance is above 3000 to identify VIPs.
-"""
+# Question 3: Smart ATM Transaction System - Functional Programming (FP)
+# Approach:
+# Calculate balances without mutating state, using map(), filter(), reduce(), and lambda.
+# We filter transactions per customer, map them to signed values, and reduce to get final balances.
 
 from functools import reduce
 
@@ -27,7 +19,7 @@ def get_balance(customer, tx_list):
     # Filter transactions belonging to the customer
     customer_tx = filter(lambda tx: tx[0] == customer, tx_list)
 
-    # Map each transaction into a signed value
+    # Map each transaction into a signed value (+deposit, -withdraw)
     signed_amounts = map(
         lambda tx: tx[2] if tx[1] == "deposit" else -tx[2],
         customer_tx
